@@ -67,10 +67,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleSubmitGuess() {
         if (isGameOver) {
+            Toast.makeText(this, "Game is over! Press New Game to play again.", Toast.LENGTH_SHORT).show()
             return
         }
 
         val userInput = guessInput.text.toString().trim()
+
+        if (userInput.isEmpty()) {
+            Toast.makeText(this, "Please enter a word", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (userInput.length != 4) {
+            Toast.makeText(this, "Please enter exactly 4 letters", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (!userInput.all { it.isLetter() }) {
+            Toast.makeText(this, "Only letters are allowed", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val guess = userInput.uppercase()
         val result = checkGuess(guess)
 
