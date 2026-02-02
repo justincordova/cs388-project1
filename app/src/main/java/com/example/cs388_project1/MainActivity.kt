@@ -38,6 +38,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeUI() {
+        guessTexts = arrayOf(
+            findViewById(R.id.guess1Text),
+            findViewById(R.id.guess2Text),
+            findViewById(R.id.guess3Text)
+        )
+
+        resultTexts = arrayOf(
+            findViewById(R.id.result1Text),
+            findViewById(R.id.result2Text),
+            findViewById(R.id.result3Text)
+        )
+
+        guessInput = findViewById(R.id.guessInput)
+        submitBtn = findViewById(R.id.submitBtn)
+        resetBtn = findViewById(R.id.resetBtn)
+        answerText = findViewById(R.id.answerText)
     }
 
     private fun setupButtons() {
