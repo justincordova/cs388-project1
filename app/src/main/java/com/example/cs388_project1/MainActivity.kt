@@ -66,9 +66,52 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleSubmitGuess() {
+        if (isGameOver) {
+            return
+        }
+
+        val userInput = guessInput.text.toString().trim()
+        val guess = userInput.uppercase()
+        val result = checkGuess(guess)
+
+        guessTexts[guessCount].text = guess
+        resultTexts[guessCount].text = result
+        guessInput.text.clear()
+
+        if (result == "OOOO") {
+            endGame()
+            return
+        }
+
+        guessCount++
+
+        if (guessCount >= 3) {
+            endGame()
+        }
     }
 
     private fun resetGame() {
+        wordToGuess = FourLetterWordList.getRandomFourLetterWord()
+        guessCount = 0
+        isGameOver = false
+
+        guessInput.text.clear()
+        submitBtn.isEnabled = true
+        answerText.visibility = TextView.GONE
+        resetBtn.visibility = TextView.GONE
+
+        for (i in 0..2) {
+            guessTexts[i].text = "_ _ _ _"
+            resultTexts[i].text = "- - - -"
+        }
+    }
+
+    private fun endGame() {
+        isGameOver = true
+        answerText.text = "The word was: $wordToGuess"
+        answerText.visibility = TextView.VISIBLE
+        submitBtn.isEnabled = false
+        resetBtn.visibility = TextView.VISIBLE
     }
 
     /**
