@@ -124,6 +124,7 @@ class MainActivity : AppCompatActivity() {
             guessTexts[i].text = "_ _ _ _"
             resultTexts[i].text = "- - - -"
         }
+        guessInput.requestFocus()
     }
 
     private fun endGame() {
