@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         guessTexts[guessCount].text = guess
         resultTexts[guessCount].text = result
         guessInput.text.clear()
+        guessInput.hideKeyboard()
 
         if (result == "OOOO") {
             endGame()
@@ -129,6 +130,11 @@ class MainActivity : AppCompatActivity() {
         answerText.visibility = TextView.VISIBLE
         submitBtn.isEnabled = false
         resetBtn.visibility = TextView.VISIBLE
+    }
+
+    private fun EditText.hideKeyboard() {
+        val imm = context.getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     /**
