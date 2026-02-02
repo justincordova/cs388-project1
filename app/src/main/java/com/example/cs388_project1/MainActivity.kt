@@ -57,5 +57,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupButtons() {
+        submitBtn.setOnClickListener {
+            handleSubmitGuess()
+        }
+        resetBtn.setOnClickListener {
+            resetGame()
+        }
+    }
+
+    private fun handleSubmitGuess() {
+    }
+
+    private fun resetGame() {
     }
 }
