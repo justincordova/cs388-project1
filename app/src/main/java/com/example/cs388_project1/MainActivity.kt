@@ -97,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         guessInput.hideKeyboard()
 
         if (result == "OOOO") {
+            Toast.makeText(this, "Congratulations! You won!", Toast.LENGTH_LONG).show()
             endGame()
             return
         }
@@ -104,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         guessCount++
 
         if (guessCount >= 3) {
+            Toast.makeText(this, "Game Over! No more guesses.", Toast.LENGTH_LONG).show()
             endGame()
         }
     }
