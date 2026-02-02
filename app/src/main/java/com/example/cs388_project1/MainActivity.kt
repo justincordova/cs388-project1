@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
 
         guessInput.text.clear()
         submitBtn.isEnabled = true
+        guessInput.isEnabled = true
         answerText.visibility = TextView.GONE
         resetBtn.visibility = TextView.GONE
 
@@ -133,6 +134,7 @@ class MainActivity : AppCompatActivity() {
         answerText.visibility = TextView.VISIBLE
         submitBtn.isEnabled = false
         resetBtn.visibility = TextView.VISIBLE
+        guessInput.isEnabled = false
     }
 
     private fun EditText.hideKeyboard() {
