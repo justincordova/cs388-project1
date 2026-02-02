@@ -70,4 +70,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetGame() {
     }
+
+    /**
+     * Parameters:
+     *   guess : String - what user entered as their guess
+     *
+     * Returns a String of 'O', '+', and 'X', where:
+     *   'O' represents right letter in right place
+     *   '+' represents right letter in wrong place
+     *   'X' represents a letter not in the target word
+     */
+    private fun checkGuess(guess: String): String {
+        var result = ""
+        for (i in 0..3) {
+            if (guess[i] == wordToGuess[i]) {
+                result += "O"
+            }
+            else if (guess[i] in wordToGuess) {
+                result += "+"
+            }
+            else {
+                result += "X"
+            }
+        }
+        return result
+    }
 }
