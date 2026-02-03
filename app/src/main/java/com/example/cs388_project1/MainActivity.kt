@@ -104,8 +104,7 @@ class MainActivity : AppCompatActivity() {
 
         val guess = userInput.uppercase()
 
-        val coloredGuess = buildColoredGuess(guess, wordToGuess)
-        guessTexts[guessCount].text = coloredGuess
+        guessTexts[guessCount].text = checkGuess(guess, wordToGuess)
 
         guessInput.text.clear()
         guessInput.hideKeyboard()
@@ -151,18 +150,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Creates a colored SpannableString for the guess
+     * Creates a colored SpannableString for guess
      *
      * Parameters:
-     *   guess: String - the user's guess
-     *   targetWord: String - the word to guess
+     *   guess: String - user's guess
+     *   targetWord: String - word to guess
      *
      * Returns: SpannableString with colored letters
      *   Green: correct letter in correct position
      *   Orange: correct letter in wrong position
      *   Gray: letter not in target word
      */
-    private fun buildColoredGuess(guess: String, targetWord: String): SpannableString {
+    private fun checkGuess(guess: String, targetWord: String): SpannableString {
         val spannable = SpannableString(guess)
 
         for (i in guess.indices) {
