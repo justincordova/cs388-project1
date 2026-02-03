@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
     private var wordToGuess: String = ""
     private var guessCount: Int = 0
     private var isGameOver: Boolean = false
+    private var wordListMode: Int = 0
+    private lateinit var wordListToggleBtn: Button
+    private val wordListModes = listOf("Normal", "Easy", "Hard")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         guessInput = findViewById(R.id.guessInput)
         submitBtn = findViewById(R.id.submitBtn)
         resetBtn = findViewById(R.id.resetBtn)
+        wordListToggleBtn = findViewById(R.id.wordListToggleBtn)
         answerText = findViewById(R.id.answerText)
     }
 
@@ -61,6 +65,12 @@ class MainActivity : AppCompatActivity() {
             handleSubmitGuess()
         }
         resetBtn.setOnClickListener {
+            resetGame()
+        }
+        wordListToggleBtn.setOnClickListener {
+            wordListMode = (wordListMode + 1) % 3
+            wordListToggleBtn.text = "Word List: ${wordListModes[wordListMode]}"
+            wordToGuess = FourLetterWordList.getRandomFourLetterWord(wordListMode)
             resetGame()
         }
     }
@@ -111,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetGame() {
-        wordToGuess = FourLetterWordList.getRandomFourLetterWord()
+        wordToGuess = FourLetterWordList.getRandomFourLetterWord(wordListMode)
         guessCount = 0
         isGameOver = false
 
