@@ -57,17 +57,6 @@
         app:layout_constraintTop_toBottomOf="@id/answerText" />
 
     <TextView
-        android:id="@+id/result1Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="- - - -"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guess1Text" />
-
-    <TextView
         android:id="@+id/guess2Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,18 +65,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/result1Text" />
-
-    <TextView
-        android:id="@+id/result2Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="- - - -"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guess2Text" />
+        app:layout_constraintTop_toBottomOf="@id/guess1Text" />
 
     <TextView
         android:id="@+id/guess3Text"
@@ -98,18 +76,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/result2Text" />
-
-    <TextView
-        android:id="@+id/result3Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="- - - -"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guess3Text" />
+        app:layout_constraintTop_toBottomOf="@id/guess2Text" />
 
     <EditText
         android:id="@+id/guessInput"
@@ -122,7 +89,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/result3Text" />
+        app:layout_constraintTop_toBottomOf="@id/guess3Text" />
 
     <Button
         android:id="@+id/submitBtn"

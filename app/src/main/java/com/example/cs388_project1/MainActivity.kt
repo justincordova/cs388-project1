@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var guessTexts: Array<TextView>
-    private lateinit var resultTexts: Array<TextView>
     private lateinit var guessInput: EditText
     private lateinit var submitBtn: Button
     private lateinit var resetBtn: Button
@@ -45,12 +44,6 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.guess1Text),
             findViewById(R.id.guess2Text),
             findViewById(R.id.guess3Text)
-        )
-
-        resultTexts = arrayOf(
-            findViewById(R.id.result1Text),
-            findViewById(R.id.result2Text),
-            findViewById(R.id.result3Text)
         )
 
         guessInput = findViewById(R.id.guessInput)
@@ -102,7 +95,6 @@ class MainActivity : AppCompatActivity() {
         val result = checkGuess(guess)
 
         guessTexts[guessCount].text = guess
-        resultTexts[guessCount].text = result
         guessInput.text.clear()
         guessInput.hideKeyboard()
 
@@ -133,7 +125,6 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..2) {
             guessTexts[i].text = "_ _ _ _"
-            resultTexts[i].text = "- - - -"
         }
         guessInput.requestFocus()
     }
