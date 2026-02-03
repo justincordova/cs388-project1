@@ -20,8 +20,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var submitBtn: Button
     private lateinit var resetBtn: Button
     private lateinit var answerText: TextView
+    private lateinit var streakText: TextView
 
     private var wordToGuess: String = ""
+    private var streak: Int = 0
     private var guessCount: Int = 0
     private var isGameOver: Boolean = false
     private var wordListMode: Int = 0
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         resetBtn = findViewById(R.id.resetBtn)
         wordListToggleBtn = findViewById(R.id.wordListToggleBtn)
         answerText = findViewById(R.id.answerText)
+        streakText = findViewById(R.id.streakText)
     }
 
     private fun setupButtons() {
@@ -110,16 +113,14 @@ class MainActivity : AppCompatActivity() {
         guessInput.hideKeyboard()
 
         if (guess == wordToGuess) {
-            Toast.makeText(this, "Congratulations! You won!", Toast.LENGTH_LONG).show()
-            endGame()
+            endGame(won = true)
             return
         }
 
         guessCount++
 
         if (guessCount >= 3) {
-            Toast.makeText(this, "Game Over! No more guesses.", Toast.LENGTH_LONG).show()
-            endGame()
+            endGame(won = false)
         }
     }
 
@@ -140,13 +141,20 @@ class MainActivity : AppCompatActivity() {
         guessInput.requestFocus()
     }
 
-    private fun endGame() {
+    private fun endGame(won: Boolean = false) {
         isGameOver = true
         answerText.text = "The word was: $wordToGuess"
         answerText.visibility = TextView.VISIBLE
         submitBtn.isEnabled = false
         resetBtn.visibility = TextView.VISIBLE
         guessInput.isEnabled = false
+
+        if (won) {
+            streak++
+        } else {
+            streak = 0
+        }
+        streakText.text = "Streak: $streak"
     }
 
     /**
