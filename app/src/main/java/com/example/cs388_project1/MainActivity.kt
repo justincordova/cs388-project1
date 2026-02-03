@@ -158,19 +158,7 @@ class MainActivity : AppCompatActivity() {
             streakText.text = "Streak: $streak"
         }
     }
-
-    /**
-     * Creates a colored SpannableString for guess
-     *
-     * Parameters:
-     *   guess: String - user's guess
-     *   targetWord: String - word to guess
-     *
-     * Returns: SpannableString with colored letters
-     *   Green: correct letter in correct position
-     *   Orange: correct letter in wrong position
-     *   Gray: letter not in target word
-     */
+    
     private fun checkGuess(guess: String, targetWord: String): SpannableString {
         val spannable = SpannableString(guess)
 
