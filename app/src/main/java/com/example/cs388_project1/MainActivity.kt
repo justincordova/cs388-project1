@@ -151,10 +151,12 @@ class MainActivity : AppCompatActivity() {
 
         if (won) {
             streak++
+            streakText.text = "Streak: $streak"
+            answerText.setTextColor(Color.parseColor("#4CAF50"))
         } else {
             streak = 0
+            streakText.text = "Streak: $streak"
         }
-        streakText.text = "Streak: $streak"
     }
 
     /**
