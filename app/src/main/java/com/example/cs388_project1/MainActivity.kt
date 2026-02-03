@@ -1,6 +1,9 @@
 package com.example.cs388_project1
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.graphics.Color
 
 class MainActivity : AppCompatActivity() {
     private lateinit var guessTexts: Array<TextView>
@@ -23,6 +27,13 @@ class MainActivity : AppCompatActivity() {
     private var wordListMode: Int = 0
     private lateinit var wordListToggleBtn: Button
     private val wordListModes = listOf("Normal", "Easy", "Hard")
+
+    companion object {
+        private const val COLOR_CORRECT = "#4CAF50"      // Green - right letter, right place
+        private const val COLOR_PRESENT = "#FF9800"      // Orange - right letter, wrong place
+        private const val COLOR_ABSENT = "#757575"       // Gray - letter not in word
+        private const val COLOR_DEFAULT = "#000000"      // Black - default text color
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,13 +103,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         val guess = userInput.uppercase()
-        val result = checkGuess(guess)
 
-        guessTexts[guessCount].text = guess
+        val coloredGuess = buildColoredGuess(guess, wordToGuess)
+        guessTexts[guessCount].text = coloredGuess
+
         guessInput.text.clear()
         guessInput.hideKeyboard()
 
-        if (result == "OOOO") {
+        if (guess == wordToGuess) {
             Toast.makeText(this, "Congratulations! You won!", Toast.LENGTH_LONG).show()
             endGame()
             return
@@ -138,33 +150,49 @@ class MainActivity : AppCompatActivity() {
         guessInput.isEnabled = false
     }
 
+    /**
+     * Creates a colored SpannableString for the guess
+     *
+     * Parameters:
+     *   guess: String - the user's guess
+     *   targetWord: String - the word to guess
+     *
+     * Returns: SpannableString with colored letters
+     *   Green: correct letter in correct position
+     *   Orange: correct letter in wrong position
+     *   Gray: letter not in target word
+     */
+    private fun buildColoredGuess(guess: String, targetWord: String): SpannableString {
+        val spannable = SpannableString(guess)
+
+        for (i in guess.indices) {
+            val guessLetter = guess[i]
+            val targetLetter = targetWord[i]
+            val color = when {
+                guessLetter == targetLetter -> {
+                    COLOR_CORRECT
+                }
+                guessLetter in targetWord -> {
+                    COLOR_PRESENT
+                }
+                else -> {
+                    COLOR_ABSENT
+                }
+            }
+
+            spannable.setSpan(
+                ForegroundColorSpan(Color.parseColor(color)),
+                i,
+                i + 1,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        return spannable
+    }
+
     private fun EditText.hideKeyboard() {
         val imm = context.getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
-    }
-
-    /**
-     * Parameters:
-     *   guess : String - what user entered as their guess
-     *
-     * Returns a String of 'O', '+', and 'X', where:
-     *   'O' represents right letter in right place
-     *   '+' represents right letter in wrong place
-     *   'X' represents a letter not in the target word
-     */
-    private fun checkGuess(guess: String): String {
-        var result = ""
-        for (i in 0..3) {
-            if (guess[i] == wordToGuess[i]) {
-                result += "O"
-            }
-            else if (guess[i] in wordToGuess) {
-                result += "+"
-            }
-            else {
-                result += "X"
-            }
-        }
-        return result
     }
 }
